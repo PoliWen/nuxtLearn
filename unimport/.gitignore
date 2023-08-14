@@ -1,0 +1,16 @@
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+.conf*
+.DS_Store
+.vscode
+*.log*
+coverage
+dist
+node_modules
+types
+playground/unimport.d.ts
