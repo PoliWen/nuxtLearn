@@ -4,11 +4,11 @@ import { createUnplugin } from 'unplugin'
 import type { FilterPattern } from '@rollup/pluginutils'
 import { createFilter } from '@rollup/pluginutils'
 import MagicString from 'magic-string'
+import { consola } from 'consola'
 import { UnimportOptions } from './types'
 import { createUnimport } from './context'
 import { scanDirExports } from './scan-dirs'
 import { toImports } from './utils'
-
 export interface UnimportPluginOptions extends UnimportOptions {
   include: FilterPattern
   exclude: FilterPattern
@@ -58,6 +58,16 @@ export default createUnplugin<Partial<UnimportPluginOptions>>((options = {}) => 
       //   code, id
       // })
 
+      consola.info('Using consola 3.0.0')
+      consola.start('Building project...')
+      consola.warn('A new version of consola is available: 3.0.1')
+      consola.success('Project built!')
+      consola.error(new Error('This is an example error. Everything is fine!'))
+      // consola.box('I am a simple box')
+      await consola.prompt('Deploy to the production?', {
+        type: 'confirm'
+      })
+
       const s = new MagicString(code)
       // console.log('autoImport', autoImport)
       await ctx.injectImports(s, id, {
@@ -76,12 +86,12 @@ export default createUnplugin<Partial<UnimportPluginOptions>>((options = {}) => 
       }
     },
     async buildStart () {
-      // console.log(11111111111111)
-      // const dir = join(__dirname, '../playground/composables')
-      // const importsResult = await scanDirExports(dir)
-      // console.log(importsResult)
-      // const toImportResult = toImports(importsResult)
-      // console.log('toImportResult', toImportResult)
+      console.log(11111111111111)
+      const dir = join(__dirname, '../playground/composables')
+      const importsResult = await scanDirExports(dir)
+      console.log(importsResult)
+      const toImportResult = toImports(importsResult)
+      console.log('toImportResult', toImportResult)
 
       await ctx.init()
 
